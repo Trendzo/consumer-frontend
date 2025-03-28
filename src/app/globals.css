@@ -1,26 +1,126 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-gray-950 text-white min-h-screen relative overflow-x-hidden;
+    background: linear-gradient(135deg, #0f0f1a 0%, #121225 100%);
+  }
+  
+  /* Animated background gradients */
+  body::before {
+    content: '';
+    @apply fixed inset-0 -z-10 opacity-70;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(140, 92, 242, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(54, 194, 207, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 50% 70%, rgba(255, 61, 113, 0.15) 0%, transparent 40%);
+    animation: pulse-slow 8s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulse-slow {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    @apply bg-gray-900/60 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+  
+  /* Neumorphism */
+  .neomorph {
+    @apply bg-gray-950 shadow-xl rounded-xl;
+  }
+  
+  /* Custom scrollbar */
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Instagram style bottom navigation */
+  .bottom-nav-item {
+    @apply flex flex-col items-center justify-center p-2 text-gray-400;
+  }
+  
+  .bottom-nav-item.active {
+    @apply text-purple-500;
+  }
+  
+  /* Swipe animation (Snitch style) */
+  .swipe-area {
+    @apply relative overflow-hidden;
+  }
+  
+  .swipe-indicator {
+    @apply absolute bottom-5 left-0 right-0 flex justify-center space-x-1;
+  }
+  
+  .swipe-dot {
+    @apply w-2 h-2 rounded-full bg-gray-400/50;
+  }
+  
+  .swipe-dot.active {
+    @apply bg-purple-500 w-4;
+  }
+  
+  /* Add to bag animation (Knot style) */
+  .add-to-bag {
+    @apply relative overflow-hidden;
+  }
+  
+  .add-to-bag-btn {
+    @apply flex items-center justify-center rounded-full w-10 h-10 bg-purple-500 text-white;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .add-to-bag-btn:hover {
+    @apply bg-purple-600;
+    transform: scale(1.1);
+  }
+  
+  .add-to-bag-btn:active {
+    transform: scale(0.9);
+  }
+  
+  /* Zepto style coupons */
+  .coupon-card {
+    @apply relative overflow-hidden rounded-lg p-4 flex items-center justify-between;
+    background: linear-gradient(45deg, #2d2942 0%, #1a1a2e 100%);
+  }
+  
+  .coupon-dashed {
+    @apply border-dashed border-l border-white/20 h-16 mx-4;
+  }
+  
+  /* Add floating gradient orbs */
+  .gradient-orb {
+    @apply absolute rounded-full opacity-30 blur-2xl;
+    animation: float 15s ease-in-out infinite alternate;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(10px, -30px) scale(1.05);
+    }
+    100% {
+      transform: translate(-20px, 15px) scale(0.95);
+    }
+  }
 }
