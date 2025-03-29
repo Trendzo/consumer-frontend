@@ -1,0 +1,35 @@
+trendzo-ecommerce/
+├── app/
+│   ├── page.js                 # Homepage
+│   ├── layout.js               # Root layout
+│   ├── globals.css             # Global styles
+├── components/
+│   ├── ui/
+│   │   ├── Button.js           # Custom button component
+│   │   ├── Card.js             # Glassmorphism card component
+│   │   ├── SearchBar.js        # Search functionality
+│   │   ├── Badge.js            # Notification/count badges
+│   ├── layout/
+│   │   ├── Header.js           # Top header with logo & search
+│   │   ├── Footer.js           # Bottom navigation bar
+│   │   ├── Container.js        # Page container with proper padding
+│   │   ├── GlassPanels.js      # Glassmorphism background panels
+│   ├── home/
+│   │   ├── HeroSection.js      # Main hero section with promotions
+│   │   ├── StoreSlider.js      # Popular stores slider
+│   │   ├── ProductsGrid.js     # Product grid layout (Zara/H&M style)
+│   │   ├── ProductCard.js      # Individual product card
+│   │   ├── CategoryNav.js      # Categories navigation
+│   │   ├── ReelSection.js      # Instagram/Pinterest style reels
+│   │   ├── PromoBar.js         # Zepto-style coupon display
+│   │   ├── TrendingNow.js      # Trending products section
+├── public/
+│   ├── images/
+│   │   ├── logo.svg
+│   │   ├── hero-bg.jpg
+│   │   ├── demo-products/
+│   │   ├── store-logos/
+│   │   ├── icons/
+├── tailwind.config.js          # Tailwind configuration
+├── package.json
+├── next.config.js

@@ -4,20 +4,47 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg-dark: #0f0f1a;
+  --color-bg-light: #f5f7fb;
+  --color-purple: #8c5cf2;
+  --color-teal: #36c2cf;
+  --color-pink: #ff3d71;
+}
+
 @layer base {
   body {
-    @apply bg-gray-950 text-white min-h-screen relative overflow-x-hidden;
+    @apply text-gray-700 min-h-screen relative overflow-x-hidden transition-colors duration-300;
+  }
+  
+  .dark body {
+    @apply bg-gray-950 text-white;
     background: linear-gradient(135deg, #0f0f1a 0%, #121225 100%);
   }
   
+  .light body {
+    @apply bg-gray-50;
+    background: linear-gradient(135deg, #f5f7fb 0%, #e9ecf6 100%);
+  }
+  
   /* Animated background gradients */
-  body::before {
+  .dark body::before {
     content: '';
     @apply fixed inset-0 -z-10 opacity-70;
     background: 
       radial-gradient(circle at 20% 20%, rgba(140, 92, 242, 0.15) 0%, transparent 40%),
       radial-gradient(circle at 80% 30%, rgba(54, 194, 207, 0.15) 0%, transparent 40%),
       radial-gradient(circle at 50% 70%, rgba(255, 61, 113, 0.15) 0%, transparent 40%);
+    animation: pulse-slow 8s ease-in-out infinite alternate;
+  }
+  
+  .light body::before {
+    content: '';
+    @apply fixed inset-0 -z-10 opacity-60;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(140, 92, 242, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(54, 194, 207, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 70%, rgba(255, 61, 113, 0.1) 0%, transparent 40%);
     animation: pulse-slow 8s ease-in-out infinite alternate;
   }
   
@@ -34,12 +61,28 @@
 @layer components {
   /* Glassmorphism */
   .glass {
-    @apply bg-gray-900/60 backdrop-blur-md border border-white/10 shadow-lg;
+    @apply backdrop-blur-md border shadow-lg transition-colors duration-300;
+  }
+  
+  .dark .glass {
+    @apply bg-gray-900/60 border-white/10;
+  }
+  
+  .light .glass {
+    @apply bg-white/70 border-gray-200;
   }
   
   /* Neumorphism */
   .neomorph {
-    @apply bg-gray-950 shadow-xl rounded-xl;
+    @apply rounded-xl shadow-xl transition-colors duration-300;
+  }
+  
+  .dark .neomorph {
+    @apply bg-gray-950;
+  }
+  
+  .light .neomorph {
+    @apply bg-gray-50;
   }
   
   /* Custom scrollbar */
@@ -53,7 +96,15 @@
   
   /* Instagram style bottom navigation */
   .bottom-nav-item {
-    @apply flex flex-col items-center justify-center p-2 text-gray-400;
+    @apply flex flex-col items-center justify-center p-2 transition-colors duration-300;
+  }
+  
+  .dark .bottom-nav-item {
+    @apply text-gray-400;
+  }
+  
+  .light .bottom-nav-item {
+    @apply text-gray-500;
   }
   
   .bottom-nav-item.active {
@@ -70,7 +121,15 @@
   }
   
   .swipe-dot {
-    @apply w-2 h-2 rounded-full bg-gray-400/50;
+    @apply w-2 h-2 rounded-full;
+  }
+  
+  .dark .swipe-dot {
+    @apply bg-gray-400/50;
+  }
+  
+  .light .swipe-dot {
+    @apply bg-gray-500/50;
   }
   
   .swipe-dot.active {
@@ -98,18 +157,41 @@
   
   /* Zepto style coupons */
   .coupon-card {
-    @apply relative overflow-hidden rounded-lg p-4 flex items-center justify-between;
+    @apply relative overflow-hidden rounded-lg p-4 flex items-center justify-between transition-colors duration-300;
+  }
+  
+  .dark .coupon-card {
     background: linear-gradient(45deg, #2d2942 0%, #1a1a2e 100%);
   }
   
+  .light .coupon-card {
+    background: linear-gradient(45deg, #eff1fa 0%, #e5e7f5 100%);
+  }
+  
   .coupon-dashed {
-    @apply border-dashed border-l border-white/20 h-16 mx-4;
+    @apply border-dashed border-l h-16 mx-4 transition-colors duration-300;
+  }
+  
+  .dark .coupon-dashed {
+    @apply border-white/20;
+  }
+  
+  .light .coupon-dashed {
+    @apply border-gray-300;
   }
   
   /* Add floating gradient orbs */
   .gradient-orb {
-    @apply absolute rounded-full opacity-30 blur-2xl;
+    @apply absolute rounded-full blur-2xl transition-opacity duration-300;
     animation: float 15s ease-in-out infinite alternate;
+  }
+  
+  .dark .gradient-orb {
+    @apply opacity-30;
+  }
+  
+  .light .gradient-orb {
+    @apply opacity-20;
   }
   
   @keyframes float {
