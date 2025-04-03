@@ -4,6 +4,7 @@ import GlassPanels from '@/components/layout/GlassPanels';
 import HeroSection from '@/components/home/HeroSection';
 import CategoryNav from '@/components/home/CategoryNav';
 import StoreSlider from '@/components/home/StoreSlider';
+import ProductVideoSlider from '@/components/home/ProductVideoSlider';
 import ProductsGrid from '@/components/home/ProductsGrid';
 import ReelSection from '@/components/home/ReelSection';
 import PromoBar from '@/components/home/PromoBar';
@@ -25,6 +26,8 @@ export default function Home() {
           <h2 className="text-2xl font-display font-bold mb-4">Popular Stores</h2>
           <StoreSlider />
         </section>
+        
+        <ProductVideoSlider />
         
         <PromoBar />
         
