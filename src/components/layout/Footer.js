@@ -1,9 +1,38 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Footer = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('home');
+  const [isNavigating, setIsNavigating] = useState(false);
+  
+  // Handle tab click with navigation
+  const handleTabClick = (tabId) => {
+    if (activeTab === tabId) return; // Don't navigate if already on that tab
+    
+    setActiveTab(tabId);
+    setIsNavigating(true);
+    
+    // Navigate based on tab id
+    if (tabId === 'home') {
+      router.push('/');
+    } else if (tabId === 'trending') {
+      router.push('/trending');
+    } else if (tabId === 'reels') {
+      router.push('/reels');
+    } else if (tabId === 'cart') {
+      router.push('/cart');
+    } else if (tabId === 'profile') {
+      router.push('/profile');
+    }
+    
+    // Reset navigating state after a delay (can be replaced with router events in a complete solution)
+    setTimeout(() => {
+      setIsNavigating(false);
+    }, 3000); // Set a reasonable timeout for navigation
+  };
   
   const tabs = [
     { 
@@ -68,39 +97,57 @@ const Footer = () => {
   ];
   
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-40">
-      <div className="glass border-t border-white/10">
-        {/* Indicator line for active tab - positioned above the navbar */}
-        <div className="container mx-auto relative">
-          <div 
-            className="absolute h-1 bg-gradient-to-r from-purple-500 to-cyan-400 transition-all duration-200 rounded-b w-12" 
-            style={{
-              left: `calc(${(tabs.findIndex(tab => tab.id === activeTab) * 20) + 10}% - 24px)`,
-              top: '-1px',
-            }}
-          />
-        </div>
-        
-        <div className="container mx-auto">
-          <div className="grid grid-cols-5 h-16">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                className={`bottom-nav-item ${activeTab === tab.id ? 'active' : ''}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                <div className={`${activeTab === tab.id ? 'text-purple-500' : 'text-gray-400'}`}>
-                  {tab.icon}
-                </div>
-                <span className={`text-xs mt-1 ${activeTab === tab.id ? 'text-purple-500 font-medium' : 'text-gray-400'}`}>
-                  {tab.label}
-                </span>
-              </button>
-            ))}
+    <>
+      {/* Global loading indicator - shows when navigating between pages */}
+      {isNavigating && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="glass p-6 rounded-2xl flex flex-col items-center">
+            <div className="relative w-16 h-16 mb-4">
+              <div className="absolute top-0 left-0 w-full h-full rounded-full border-4 border-t-purple-500 border-r-cyan-400 border-b-pink-500 border-l-indigo-500 animate-spin"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-400">
+                T
+              </div>
+            </div>
+            <p className="text-white font-medium">Loading...</p>
           </div>
         </div>
-      </div>
-    </footer>
+      )}
+
+      <footer className="fixed bottom-0 left-0 right-0 z-40">
+        <div className="glass border-t border-white/10">
+          {/* Indicator line for active tab - positioned above the navbar */}
+          <div className="container mx-auto relative">
+            <div 
+              className="absolute h-1 bg-gradient-to-r from-purple-500 to-cyan-400 transition-all duration-200 rounded-b w-12" 
+              style={{
+                left: `calc(${(tabs.findIndex(tab => tab.id === activeTab) * 20) + 10}% - 24px)`,
+                top: '-1px',
+              }}
+            />
+          </div>
+          
+          <div className="container mx-auto">
+            <div className="grid grid-cols-5 h-16">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  className={`bottom-nav-item ${activeTab === tab.id ? 'active' : ''}`}
+                  onClick={() => handleTabClick(tab.id)}
+                  disabled={isNavigating}
+                >
+                  <div className={`${activeTab === tab.id ? 'text-purple-500' : 'text-gray-400'}`}>
+                    {tab.icon}
+                  </div>
+                  <span className={`text-xs mt-1 ${activeTab === tab.id ? 'text-purple-500 font-medium' : 'text-gray-400'}`}>
+                    {tab.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 };
 
