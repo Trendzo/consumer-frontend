@@ -3,6 +3,9 @@ trendzo-ecommerce/
 │   ├── page.js                 # Homepage
 │   ├── layout.js               # Root layout
 │   ├── globals.css             # Global styles
+│   ├── trending/               # New trending page directory
+│   │   ├── page.js             # Trending page component
+│   │   └── loading.js          # Trending page loading state
 ├── components/
 │   ├── ui/
 │   │   ├── Button.js           # Custom button component
@@ -11,7 +14,7 @@ trendzo-ecommerce/
 │   │   ├── Badge.js            # Notification/count badges
 │   ├── layout/
 │   │   ├── Header.js           # Top header with logo & search
-│   │   ├── Footer.js           # Bottom navigation bar
+│   │   ├── Footer.js           # Bottom navigation bar (updated with navigation)
 │   │   ├── Container.js        # Page container with proper padding
 │   │   ├── GlassPanels.js      # Glassmorphism background panels
 │   ├── home/
@@ -23,6 +26,12 @@ trendzo-ecommerce/
 │   │   ├── ReelSection.js      # Instagram/Pinterest style reels
 │   │   ├── PromoBar.js         # Zepto-style coupon display
 │   │   ├── TrendingNow.js      # Trending products section
+│   ├── trending/               # New trending components directory
+│   │   ├── TrendingHeader.js   # Trending page header with filters
+│   │   ├── TrendingGrid.js     # Main grid layout for trending items
+│   │   ├── TrendingItem.js     # Individual trending item card
+│   │   ├── TrendingCategories.js # Trending categories section
+│   │   └── TrendingHashtags.js # Trending hashtags component
 ├── public/
 │   ├── images/
 │   │   ├── logo.svg
@@ -32,4 +41,4 @@ trendzo-ecommerce/
 │   │   ├── icons/
 ├── tailwind.config.js          # Tailwind configuration
 ├── package.json
-├── next.config.js
+└── next.config.js
