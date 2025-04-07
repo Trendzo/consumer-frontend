@@ -1,19 +1,37 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 const Footer = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState('home');
   const [isNavigating, setIsNavigating] = useState(false);
+  
+  // Set the active tab based on the current path
+  useEffect(() => {
+    if (pathname === '/') {
+      setActiveTab('home');
+    } else if (pathname === '/trending') {
+      setActiveTab('trending');
+    } else if (pathname === '/reels') {
+      setActiveTab('reels');
+    } else if (pathname === '/cart') {
+      setActiveTab('cart');
+    } else if (pathname === '/profile') {
+      setActiveTab('profile');
+    }
+    
+    // When pathname changes, navigation is complete
+    setIsNavigating(false);
+  }, [pathname]);
   
   // Handle tab click with navigation
   const handleTabClick = (tabId) => {
     if (activeTab === tabId) return; // Don't navigate if already on that tab
     
-    setActiveTab(tabId);
-    setIsNavigating(true);
+    setIsNavigating(true); // Start loading state
     
     // Navigate based on tab id
     if (tabId === 'home') {
@@ -28,10 +46,7 @@ const Footer = () => {
       router.push('/profile');
     }
     
-    // Reset navigating state after a delay (can be replaced with router events in a complete solution)
-    setTimeout(() => {
-      setIsNavigating(false);
-    }, 3000); // Set a reasonable timeout for navigation
+    // Note: The loading state will be cleared when the pathname changes in the useEffect above
   };
   
   const tabs = [
