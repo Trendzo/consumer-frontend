@@ -206,3 +206,107 @@
     }
   }
 }
+
+/* Add these to your globals.css */
+
+/* Fade in and out animation for instructions */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fadeInOut {
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+/* Swipe animation for cards */
+@keyframes swipeRight {
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  100% {
+    transform: translateX(150%) rotate(30deg);
+  }
+}
+
+@keyframes swipeLeft {
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  100% {
+    transform: translateX(-150%) rotate(-30deg);
+  }
+}
+
+.animate-swipe-right {
+  animation: swipeRight 0.5s ease-out forwards;
+}
+
+.animate-swipe-left {
+  animation: swipeLeft 0.5s ease-out forwards;
+}
+
+/* Like/Reject button pulse effect */
+@keyframes likePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes rejectPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.animate-like-pulse {
+  animation: likePulse 0.5s 1;
+}
+
+.animate-reject-pulse {
+  animation: rejectPulse 0.5s 1;
+}
+
+/* Floating heart animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-float-up {
+  animation: floatUp 1s ease-out forwards;
+}
