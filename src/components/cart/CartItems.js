@@ -62,13 +62,6 @@ const CartItems = () => {
     setCartItems(cartItems.filter(item => item.id !== itemId));
   };
   
-  // Handle move to saved
-  const moveToSaved = (itemId) => {
-    // In a real app, this would move the item to the saved/wishlist collection
-    console.log(`Moving item ${itemId} to saved for later`);
-    removeItem(itemId);
-  };
-  
   return (
     <Card variant="glass" className="overflow-hidden">
       <div className="p-4">
@@ -88,7 +81,6 @@ const CartItems = () => {
                 item={item}
                 updateQuantity={updateQuantity}
                 removeItem={removeItem}
-                moveToSaved={moveToSaved}
               />
             ))
           ) : (
