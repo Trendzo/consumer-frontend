@@ -18,10 +18,13 @@ const ReelsViewer = () => {
   const [swipeAnimation, setSwipeAnimation] = useState(null);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [hasShownInstructions, setHasShownInstructions] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false); // New state to track transitions
   const reelsContainerRef = useRef(null);
   
   // Handle swipe gesture (using mobile-friendly navigation)
   const handleSwipe = (direction) => {
+    if (isTransitioning) return; // Prevent multiple swipes during transition
+    
     if (direction === 'left') {
       // Reject (skip to next)
       handleReject();
@@ -33,6 +36,9 @@ const ReelsViewer = () => {
   
   // Function to handle like/add to wishlist
   const handleLike = () => {
+    if (isTransitioning) return; // Prevent action during transition
+    setIsTransitioning(true); // Start transition
+    
     // Add current reel to wishlist
     const currentReel = reels[currentReelIndex];
     addToWishlist(currentReel.id);
@@ -48,11 +54,19 @@ const ReelsViewer = () => {
       
       // Move to next reel
       moveToNextReel();
+      
+      // End transition after animation completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 300);
     }, 500);
   };
   
   // Function to handle reject
   const handleReject = () => {
+    if (isTransitioning) return; // Prevent action during transition
+    setIsTransitioning(true); // Start transition
+    
     // Show reject animation
     setShowRejectEffect(true);
     setSwipeAnimation('left');
@@ -64,6 +78,11 @@ const ReelsViewer = () => {
       
       // Move to next reel
       moveToNextReel();
+      
+      // End transition after animation completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 300);
     }, 500);
   };
   
@@ -81,7 +100,11 @@ const ReelsViewer = () => {
   
   // Go back to previous reel
   const goToPreviousReel = () => {
+    if (isTransitioning) return; // Prevent action during transition
+    
     if (reelHistory.length > 0) {
+      setIsTransitioning(true); // Start transition
+      
       // Pop the last item from history
       const newHistory = [...reelHistory];
       const previousIndex = newHistory.pop();
@@ -89,6 +112,11 @@ const ReelsViewer = () => {
       // Update state
       setReelHistory(newHistory);
       setCurrentReelIndex(previousIndex);
+      
+      // End transition after animation completes
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 300);
     }
   };
   
@@ -121,6 +149,7 @@ const ReelsViewer = () => {
               onSwipe={handleSwipe}
               showInstructions={!hasShownInstructions}
               onInstructionsShown={() => setHasShownInstructions(true)}
+              isTransitioning={isTransitioning} // Pass transitioning state to ReelCard
             />
           </motion.div>
         </AnimatePresence>
@@ -155,7 +184,7 @@ const ReelsViewer = () => {
           size="lg"
           className="flex items-center"
           onClick={goToPreviousReel}
-          disabled={reelHistory.length === 0}
+          disabled={reelHistory.length === 0 || isTransitioning}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
@@ -168,6 +197,7 @@ const ReelsViewer = () => {
           size="lg"
           className="flex items-center"
           onClick={() => handleSwipe('left')}
+          disabled={isTransitioning}
         >
           Skip
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

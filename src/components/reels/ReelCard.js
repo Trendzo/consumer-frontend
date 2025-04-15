@@ -11,7 +11,8 @@ const ReelCard = ({
   reel, 
   onSwipe, 
   showInstructions = false,
-  onInstructionsShown = () => {}
+  onInstructionsShown = () => {},
+  isTransitioning = false // Add transitioning prop with default
 }) => {
   const { isInWishlist } = useReelStore();
   const [isMuted, setIsMuted] = useState(true);
@@ -34,8 +35,8 @@ const ReelCard = ({
   
   // Set up swipe handlers
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => onSwipe('left'),  // Reject
-    onSwipedRight: () => onSwipe('right'), // Like
+    onSwipedLeft: () => !isTransitioning && onSwipe('left'),  // Reject, only if not transitioning
+    onSwipedRight: () => !isTransitioning && onSwipe('right'), // Like, only if not transitioning
     trackMouse: true,
     preventDefaultTouchmoveEvent: true,
   });
@@ -47,11 +48,16 @@ const ReelCard = ({
     if (videoElement) {
       videoElement.muted = isMuted;
       
-      if (isPlaying) {
-        videoElement.play().catch(error => {
-          console.error("Video play failed:", error);
-          // Fallback to poster image on autoplay failure
-        });
+      if (isPlaying && !isTransitioning) {
+        const playPromise = videoElement.play();
+        
+        // Handle play promise properly to avoid the error
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            // Auto-play was prevented, handle silently
+            console.log("Auto-play prevented:", error);
+          });
+        }
         
         // Set up progress tracking
         progressIntervalRef.current = setInterval(() => {
@@ -60,26 +66,44 @@ const ReelCard = ({
           }
         }, 100);
       } else {
-        videoElement.pause();
+        // Pause video during transitions to prevent errors
+        try {
+          videoElement.pause();
+        } catch (e) {
+          // Ignore pause errors
+        }
         clearInterval(progressIntervalRef.current);
       }
     }
     
     return () => {
       clearInterval(progressIntervalRef.current);
+      // Ensure video is properly cleaned up on component unmount
+      if (videoRef.current) {
+        try {
+          videoRef.current.pause();
+          videoRef.current.src = ""; // Clear the source
+        } catch (e) {
+          // Ignore errors during cleanup
+        }
+      }
     };
-  }, [isPlaying, isMuted, reel.id]);
+  }, [isPlaying, isMuted, reel.id, isTransitioning]);
   
   // Toggle video play/pause
   const togglePlay = (e) => {
     e.stopPropagation();
-    setIsPlaying(!isPlaying);
+    if (!isTransitioning) {
+      setIsPlaying(!isPlaying);
+    }
   };
   
   // Toggle mute/unmute
   const toggleMute = (e) => {
     e.stopPropagation();
-    setIsMuted(!isMuted);
+    if (!isTransitioning) {
+      setIsMuted(!isMuted);
+    }
   };
   
   // Format numbers for display (e.g., 1.2k)
@@ -107,13 +131,17 @@ const ReelCard = ({
   // Handle like action
   const handleLike = (e) => {
     e.stopPropagation();
-    onSwipe('right');
+    if (!isTransitioning) {
+      onSwipe('right');
+    }
   };
   
   // Handle reject action
   const handleReject = (e) => {
     e.stopPropagation();
-    onSwipe('left');
+    if (!isTransitioning) {
+      onSwipe('left');
+    }
   };
   
   const discountPercent = calculateDiscount();
@@ -136,6 +164,7 @@ const ReelCard = ({
           loop
           playsInline
           onClick={togglePlay}
+          preload="metadata"
         >
           <source src={reel.videoUrl} type="video/mp4" />
           Your browser does not support the video tag.
@@ -243,6 +272,7 @@ const ReelCard = ({
             size="sm"
             className="py-1 px-3"
             onClick={handleLike}
+            disabled={isTransitioning}
           >
             {inWishlist ? 'In Wishlist' : 'Shop now'}
           </Button>
@@ -258,6 +288,7 @@ const ReelCard = ({
         <button 
           className="w-12 h-12 glass rounded-full flex items-center justify-center text-white/90 backdrop-blur-md border border-red-500/30 hover:bg-red-500/20 transition-all hover:scale-110"
           onClick={handleReject}
+          disabled={isTransitioning}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -273,6 +304,7 @@ const ReelCard = ({
         <button 
           className="w-12 h-12 glass rounded-full flex items-center justify-center text-white/90 backdrop-blur-md border border-green-500/30 hover:bg-green-500/20 transition-all hover:scale-110"
           onClick={handleLike}
+          disabled={isTransitioning}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -291,6 +323,11 @@ const ReelCard = ({
             <div className="text-xs text-white/70">Tap to pause/play</div>
           </div>
         </div>
+      )}
+      
+      {/* Overlay during transition to prevent user interaction */}
+      {isTransitioning && (
+        <div className="absolute inset-0 z-30 bg-transparent"></div>
       )}
     </Card>
   );
