@@ -1,3 +1,9 @@
+// Find line 200 and look for an apostrophe that needs escaping
+// The error is likely in the store name "Levi's" which should be "Levi&apos;s"
+
+// Partial fix for OrdersPanel.js - focus on the error area, around line 200
+// This is based on the error message without seeing the exact code
+
 'use client';
 
 import { useState } from 'react';
@@ -197,7 +203,7 @@ const OrdersPanel = () => {
             </svg>
           </div>
           <h3 className="text-lg font-bold mb-2">No orders yet</h3>
-          <p className="text-text-secondary mb-6">You haven't placed any orders yet</p>
+          <p className="text-text-secondary mb-6">You haven&apos;t placed any orders yet</p>
           <Button variant="primary">
             Browse Products
           </Button>
