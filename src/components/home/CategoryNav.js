@@ -11,15 +11,15 @@ const CategoryNav = () => {
       subtext: 'selected products',
       tag: 'Online Exclusive',
       image: '/api/placeholder/400/320',
-      bgColor: 'bg-blue-200',
-      textColor: 'text-gray-900',
+      bgColor: 'bg-gradient-to-br from-blue-500 to-indigo-600',
+      textColor: 'text-white',
       textSize: 'text-2xl md:text-3xl',
       highlight: true,
     },
     {
       id: 'summer-shirts',
       label: 'SUMMER SHIRTS',
-      image: '/api/placeholder/400/320',
+      image: 'https://tse3.mm.bing.net/th?id=OIP.zHVzhVe4pTzhGgkaf8JLjwAAAA&w=448&h=448&c=7',
       bgColor: 'bg-orange-50',
       textColor: 'text-white',
       textSize: 'text-xl md:text-2xl',
@@ -27,7 +27,7 @@ const CategoryNav = () => {
     {
       id: 'check-shirts',
       label: 'CHECK SHIRTS',
-      image: '/api/placeholder/400/320',
+      image: 'https://tse3.mm.bing.net/th?id=OIP.3TS7k42yqMRMA1DGWLx3eAHaJh&w=474&h=474&c=7',
       bgColor: 'bg-blue-50',
       textColor: 'text-white',
       textSize: 'text-xl md:text-2xl',
@@ -35,7 +35,7 @@ const CategoryNav = () => {
     {
       id: 'trousers',
       label: 'TROUSERS',
-      image: '/api/placeholder/400/320',
+      image: 'https://www.simonjersey.com/images/contemporary-womens-straight-leg-trouser-unhemmed-length-grey-p2026-243588_image.jpg',
       bgColor: 'bg-green-50',
       textColor: 'text-white',
       textSize: 'text-xl md:text-2xl',
@@ -43,7 +43,7 @@ const CategoryNav = () => {
     {
       id: 'jeans',
       label: 'JEANS',
-      image: '/api/placeholder/400/320',
+      image: 'https://tse3.mm.bing.net/th?id=OIP.ka1D1JNPLTIgTQBFRfRHggHaJ4&w=474&h=474&c=7',
       bgColor: 'bg-purple-50',
       textColor: 'text-white',
       textSize: 'text-xl md:text-2xl',
@@ -51,7 +51,7 @@ const CategoryNav = () => {
     {
       id: 'tshirts',
       label: 'BASIC T-SHIRTS',
-      image: '/api/placeholder/400/320',
+      image: 'https://tse4.mm.bing.net/th?id=OIP.ZYHzmXkieClq6dQxU54uuQAAAA&w=474&h=474&c=7',
       bgColor: 'bg-yellow-50',
       textColor: 'text-white',
       textSize: 'text-xl md:text-2xl',
@@ -109,8 +109,8 @@ const CategoryNav = () => {
               
               {tile.highlight && (
                 <div className="absolute top-2 left-2 md:top-3 md:left-3">
-                  <div className="bg-red-500 text-white text-xs md:text-sm font-bold px-2 py-1 rounded-lg shadow-lg transform rotate-0 scale-100">
-                    SNITCH DEAL
+                  <div className="bg-red-500 text-white text-xs md:text-sm font-bold px-2 py-1 rounded-lg shadow-lg transform rotate-0 scale-100 animate-pulse">
+                    SNATCH DEAL
                   </div>
                 </div>
               )}
