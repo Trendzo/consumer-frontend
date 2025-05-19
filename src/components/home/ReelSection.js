@@ -6,40 +6,40 @@ import Card from '@/components/ui/Card';
 const ReelSection = () => {
   const scrollRef = useRef(null);
   
-  // Mock data
+  // Mock data with videos instead of images
   const reels = [
     {
       id: 1,
       title: 'Summer essentials you need',
-      image: '/images/demo-products/reel-1.jpg',
+      videoUrl: '/videos/3.mp4',
       likes: 423,
       user: { name: 'FashionDaily', avatar: '/images/demo-products/avatar-1.jpg' }
     },
     {
       id: 2,
       title: 'Street style lookbook 2025',
-      image: '/images/demo-products/reel-2.jpg',
+      videoUrl: '/videos/6.mp4',
       likes: 892,
       user: { name: 'StyleCraze', avatar: '/images/demo-products/avatar-2.jpg' }
     },
     {
       id: 3,
       title: 'Office wear inspiration',
-      image: '/images/demo-products/reel-3.jpg',
+      videoUrl: '/videos/7.mp4',
       likes: 512,
       user: { name: 'WorkChic', avatar: '/images/demo-products/avatar-3.jpg' }
     },
     {
       id: 4,
       title: 'Weekend casual outfits',
-      image: '/images/demo-products/reel-4.jpg',
+      videoUrl: '/videos/8.mp4',
       likes: 743,
       user: { name: 'TrendHunter', avatar: '/images/demo-products/avatar-4.jpg' }
     },
     {
       id: 5,
       title: 'Accessorize like a pro',
-      image: '/images/demo-products/reel-5.jpg',
+      videoUrl: '/videos/9.mp4',
       likes: 651,
       user: { name: 'GlamGuide', avatar: '/images/demo-products/avatar-5.jpg' }
     }
@@ -62,12 +62,23 @@ const ReelSection = () => {
         {reels.map((reel) => (
           <div key={reel.id} className="w-40 flex-shrink-0">
             <Card variant="glass" hover className="h-64">
-              <div 
-                className="relative h-full w-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${reel.image})` }}
-              >
+              <div className="relative h-full w-full overflow-hidden">
+                {/* Video element instead of background image */}
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                >
+                  <source src={reel.videoUrl} type="video/mp4" />
+                </video>
+                
+                {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 
+                {/* User avatar */}
                 <div className="absolute top-3 left-3 flex items-center">
                   <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-purple-500">
                     <div className="w-full h-full bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center text-white font-bold">
@@ -76,6 +87,7 @@ const ReelSection = () => {
                   </div>
                 </div>
                 
+                {/* Content overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-3">
                   <h3 className="text-white font-medium text-sm line-clamp-2 mb-1">
                     {reel.title}
@@ -95,6 +107,13 @@ const ReelSection = () => {
                       </span>
                     </div>
                   </div>
+                </div>
+                
+                {/* Volume indicator */}
+                <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-black/40 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM12.293 7.293a1 1 0 011.414 0L15 8.586l1.293-1.293a1 1 0 111.414 1.414L16.414 10l1.293 1.293a1 1 0 01-1.414 1.414L15 11.414l-1.293 1.293a1 1 0 01-1.414-1.414L13.586 10l-1.293-1.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
                 </div>
               </div>
             </Card>

@@ -6,32 +6,27 @@ import Card from '@/components/ui/Card';
 const ProductVideoSlider = () => {
   const scrollRef = useRef(null);
   
-  // Mock data for videos
+  // Mock data for videos (removed posterUrl)
   const videos = [
     {
       id: 1,
-      videoUrl: '/videos/product-1.mp4',
-      posterUrl: '/images/demo-products/video-poster-1.jpg',
+      videoUrl: '/videos/1.mp4',
     },
     {
       id: 2,
-      videoUrl: '/videos/product-2.mp4',
-      posterUrl: '/images/demo-products/video-poster-2.jpg',
+      videoUrl: '/videos/2.mp4',
     },
     {
       id: 3,
-      videoUrl: '/videos/product-3.mp4',
-      posterUrl: '/images/demo-products/video-poster-3.jpg',
+      videoUrl: '/videos/3.mp4',
     },
     {
       id: 4,
-      videoUrl: '/videos/product-4.mp4',
-      posterUrl: '/images/demo-products/video-poster-4.jpg',
+      videoUrl: '/videos/4.mp4',
     },
     {
       id: 5,
-      videoUrl: '/videos/product-5.mp4',
-      posterUrl: '/images/demo-products/video-poster-5.jpg',
+      videoUrl: '/videos/5.mp4',
     }
   ];
   
@@ -60,14 +55,14 @@ const ProductVideoSlider = () => {
             <div key={video.id} className="w-64 flex-shrink-0">
               <Card variant="glass" className="h-96 overflow-hidden">
                 <div className="relative h-full w-full">
-                  {/* Simple video element with autoplay */}
+                  {/* Video element with immediate autoplay, no poster */}
                   <video
                     className="h-full w-full object-cover"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    poster={video.posterUrl || '/api/placeholder/240/420'}
+                    preload="auto"
                   >
                     <source src={video.videoUrl} type="video/mp4" />
                   </video>

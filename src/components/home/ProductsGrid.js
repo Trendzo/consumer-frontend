@@ -13,8 +13,8 @@ const ProductsGrid = () => {
       rating: 4.7,
       isNew: true,
       images: [
-        '/images/demo-products/tshirt-1.jpg',
-        '/images/demo-products/tshirt-2.jpg',
+        '/images/2.jpg',
+        '/images/3.jpg',
       ],
     },
     {
@@ -26,8 +26,8 @@ const ProductsGrid = () => {
       rating: 4.3,
       isNew: false,
       images: [
-        '/images/demo-products/jeans-1.jpg',
-        '/images/demo-products/jeans-2.jpg',
+        '/images/4.jpg',
+        '/images/5.jpg',
       ],
     },
     {
@@ -40,8 +40,8 @@ const ProductsGrid = () => {
       rating: 4.5,
       isNew: true,
       images: [
-        '/images/demo-products/dress-1.jpg',
-        '/images/demo-products/dress-2.jpg',
+        '/images/6.jpg',
+        '/images/7.jpg',
       ],
     },
     {
@@ -53,8 +53,8 @@ const ProductsGrid = () => {
       rating: 4.8,
       isNew: false,
       images: [
-        '/images/demo-products/shoes-1.jpg',
-        '/images/demo-products/shoes-2.jpg',
+        '/images/8.jpg',
+        '/images/9.jpg',
       ],
     },
   ];
