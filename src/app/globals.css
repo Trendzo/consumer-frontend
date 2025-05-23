@@ -310,3 +310,156 @@
 .animate-float-up {
   animation: floatUp 1s ease-out forwards;
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Search backdrop animation */
+@keyframes searchBackdropIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.search-backdrop-in {
+  animation: searchBackdropIn 0.2s ease-out forwards;
+}
+
+/* Search results dropdown animation */
+@keyframes searchResultsIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-results-in {
+  animation: searchResultsIn 0.3s ease-out forwards;
+}
+
+/* Recent search pill hover effect */
+.recent-search-pill {
+  transition: all 0.2s ease;
+}
+
+.recent-search-pill:hover {
+  background: linear-gradient(90deg, rgba(140, 92, 242, 0.1) 0%, rgba(54, 194, 207, 0.1) 100%);
+}
+
+/* Search input focus ring animation */
+@keyframes focusRingPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(140, 92, 242, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 4px rgba(140, 92, 242, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(140, 92, 242, 0);
+  }
+}
+
+.search-input-focus {
+  animation: focusRingPulse 1.5s infinite;
+}
+
+/* Add a subtle shadow for search suggestions on hover */
+.search-suggestion:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Add these animation keyframes to your globals.css file */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Add this to your globals.css file */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Mobile search transition */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.2s ease-out forwards;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
