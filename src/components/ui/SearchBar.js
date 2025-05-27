@@ -57,7 +57,7 @@ const SearchBar = ({
   
   return (
     <div className={`relative ${className}`}>
-      <div className={`flex items-center ${variants[variant]} rounded-full pl-4 pr-2 py-2`}>
+      <div className={`flex items-center ${variants[variant]} rounded-full pl-4 pr-2 py-2 `}>
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           className={`h-5 w-5 ${isSearching ? 'text-purple-500 animate-pulse' : 'text-text-secondary'}`}
@@ -118,7 +118,7 @@ const SearchBar = ({
       {/* Loading indicator shimmer effect */}
       {isSearching && (
         <div className="absolute top-0 left-0 right-0 h-1 overflow-hidden">
-          <div className="h-full w-full bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600 animate-shimmer"></div>
+          <div className="h-full w-[95%] mx-auto bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600 animate-shimmer"></div>
         </div>
       )}
     </div>

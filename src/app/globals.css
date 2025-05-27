@@ -147,7 +147,7 @@
   }
   
   .add-to-bag-btn:hover {
-    @apply bg-purple-600;
+    @apply bg-purple-600 rounded-full;
     transform: scale(1.1);
   }
   
