@@ -128,12 +128,12 @@ const Header = () => {
     }
   };
   
-  // Use suggested search term
-  const useSearchTerm = (term) => {
-    setSearchQuery(term);
-    router.push(`/search?q=${encodeURIComponent(term)}`);
-    setIsSearchOpen(false);
-  };
+  // // Use suggested search term
+  // const useSearchTerm = (term) => {
+  //   setSearchQuery(term);
+  //   router.push(`/search?q=${encodeURIComponent(term)}`);
+  //   setIsSearchOpen(false);
+  // };
   
   return (
     <header 
@@ -249,7 +249,7 @@ const Header = () => {
                               <div 
                                 key={index}
                                 className="px-4 py-3 hover:bg-white/5 cursor-pointer transition-all flex items-center"
-                                onClick={() => useSearchTerm(suggestion)}
+                                // onClick={() => useSearchTerm(suggestion)}
                               >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-purple-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -269,7 +269,7 @@ const Header = () => {
                                 <div 
                                   key={index}
                                   className="glass px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-purple-500/10 transition-all"
-                                  onClick={() => useSearchTerm(term)}
+                                  // onClick={() => useSearchTerm(term)}
                                 >
                                   {term}
                                 </div>
@@ -341,7 +341,7 @@ const Header = () => {
                           <div 
                             key={index}
                             className="px-4 py-3 hover:bg-white/5 cursor-pointer transition-all flex items-center"
-                            onClick={() => useSearchTerm(suggestion)}
+                            // onClick={() => useSearchTerm(suggestion)}
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-purple-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -361,7 +361,7 @@ const Header = () => {
                             <div 
                               key={index}
                               className="glass px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-purple-500/10 transition-all"
-                              onClick={() => useSearchTerm(term)}
+                              // onClick={() => useSearchTerm(term)}
                             >
                               {term}
                             </div>
