@@ -9,7 +9,7 @@ const ReelStoreContext = createContext();
 const mockReels = [
   {
     id: 1,
-    videoUrl: '/videos/reel-1.mp4',
+    videoUrl: '/videos/1.mp4',
     posterUrl: '/images/demo-products/reel-1.jpg',
     title: 'Summer Essentials Collection',
     product: {
@@ -30,7 +30,7 @@ const mockReels = [
   },
   {
     id: 2,
-    videoUrl: '/videos/reel-2.mp4',
+    videoUrl: '/videos/2.mp4',
     posterUrl: '/images/demo-products/reel-2.jpg',
     title: 'Street Style Lookbook 2025',
     product: {
@@ -51,7 +51,7 @@ const mockReels = [
   },
   {
     id: 3,
-    videoUrl: '/videos/reel-3.mp4',
+    videoUrl: '/videos/3.mp4',
     posterUrl: '/images/demo-products/reel-3.jpg',
     title: 'Office Wear Inspiration',
     product: {
@@ -71,7 +71,7 @@ const mockReels = [
   },
   {
     id: 4,
-    videoUrl: '/videos/reel-4.mp4',
+    videoUrl: '/videos/4.mp4',
     posterUrl: '/images/demo-products/reel-4.jpg',
     title: 'Weekend Casual Outfits',
     product: {
@@ -91,7 +91,7 @@ const mockReels = [
   },
   {
     id: 5,
-    videoUrl: '/videos/reel-5.mp4',
+    videoUrl: '/videos/5.mp4',
     posterUrl: '/images/demo-products/reel-5.jpg',
     title: 'Accessorize Like a Pro',
     product: {
@@ -111,7 +111,7 @@ const mockReels = [
   },
   {
     id: 6,
-    videoUrl: '/videos/reel-6.mp4',
+    videoUrl: '/videos/6.mp4',
     posterUrl: '/images/demo-products/reel-2.jpg',
     title: 'Party Ready Outfits',
     product: {
@@ -131,7 +131,7 @@ const mockReels = [
   },
   {
     id: 7,
-    videoUrl: '/videos/reel-7.mp4',
+    videoUrl: '/videos/7.mp4',
     posterUrl: '/images/demo-products/reel-3.jpg',
     title: 'Athleisure Outfit Ideas',
     product: {
@@ -152,7 +152,7 @@ const mockReels = [
   },
   {
     id: 8,
-    videoUrl: '/videos/reel-8.mp4',
+    videoUrl: '/videos/8.mp4',
     posterUrl: '/images/demo-products/reel-4.jpg',
     title: 'Beach Vacation Essentials',
     product: {

@@ -31,7 +31,7 @@ const TrendingGrid = () => {
       likes: 842,
       comments: 56,
       deliveryTime: '25 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/13.jpg',
       tags: ['OversizedTee', 'SummerOutfit'],
     },
     {
@@ -45,7 +45,7 @@ const TrendingGrid = () => {
       likes: 756,
       comments: 43,
       deliveryTime: '30 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/2.jpg',
       tags: ['CargoPants', 'StreetStyle'],
     },
     {
@@ -58,7 +58,7 @@ const TrendingGrid = () => {
       likes: 689,
       comments: 38,
       deliveryTime: '35 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/14.jpg',
       tags: ['ChunkySneakers', 'Footwear'],
     },
     {
@@ -72,7 +72,7 @@ const TrendingGrid = () => {
       likes: 623,
       comments: 41,
       deliveryTime: '45 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/4.jpg',
       tags: ['MaxiDress', 'FloralPrint'],
     },
     {
@@ -85,7 +85,7 @@ const TrendingGrid = () => {
       likes: 589,
       comments: 29,
       deliveryTime: '40 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/5.jpg',
       tags: ['LinenShirt', 'SummerOutfit'],
     },
     {
@@ -99,7 +99,7 @@ const TrendingGrid = () => {
       likes: 547,
       comments: 34,
       deliveryTime: '30 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/6.jpg',
       tags: ['MomJeans', 'DenimStyle'],
     },
     {
@@ -113,7 +113,7 @@ const TrendingGrid = () => {
       likes: 498,
       comments: 22,
       deliveryTime: '30 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/7.jpg',
       tags: ['BucketHat', 'Accessories'],
     },
     {
@@ -126,7 +126,7 @@ const TrendingGrid = () => {
       likes: 456,
       comments: 31,
       deliveryTime: '25 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/8.jpg',
       tags: ['TieDye', 'Sweatshirt'],
     },
     {
@@ -140,7 +140,7 @@ const TrendingGrid = () => {
       likes: 423,
       comments: 28,
       deliveryTime: '45 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/9.jpg',
       tags: ['CrossBodyBag', 'Accessories'],
     },
     {
@@ -153,7 +153,7 @@ const TrendingGrid = () => {
       likes: 402,
       comments: 25,
       deliveryTime: '40 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/10.jpg',
       tags: ['WideLeg', 'OfficeLook'],
     },
     {
@@ -166,7 +166,7 @@ const TrendingGrid = () => {
       likes: 387,
       comments: 19,
       deliveryTime: '35 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/11.jpg',
       tags: ['SlipOn', 'Footwear'],
     },
     {
@@ -180,7 +180,7 @@ const TrendingGrid = () => {
       likes: 362,
       comments: 21,
       deliveryTime: '50 min',
-      image: '/api/placeholder/400/320',
+      image: '/images/12.jpg',
       tags: ['Kimono', 'Ethnic'],
     },
   ];
