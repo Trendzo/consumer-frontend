@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider>
           <CartProvider>
           <div className="min-h-screen flex flex-col">
-            <main className="flex-grow pb-20">
+            <main className="flex-grow pb-16">
               {children}
             </main>
             <Footer />

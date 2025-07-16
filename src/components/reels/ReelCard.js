@@ -150,7 +150,7 @@ const ReelCard = ({
   return (
     <Card 
       variant="glass" 
-      className="w-full h-full relative overflow-hidden"
+      className="w-full h-full relative overflow-hidden !rounded-none"
       {...swipeHandlers}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}

@@ -71,7 +71,7 @@ const WishlistDrawer = ({ isOpen, onClose }) => {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-0 left-0 right-0 glass max-h-[85vh] overflow-y-auto rounded-t-2xl"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 glass max-h-[85vh] overflow-y-auto rounded-t-2xl w-full max-w-5xl"
             ref={overlayRef}
           >
             <div className="sticky top-0 left-0 right-0 glass py-4 px-6 backdrop-blur-md z-10 border-b border-white/10">

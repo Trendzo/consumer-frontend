@@ -12,12 +12,13 @@ export const metadata = {
 export default function ReelsPage() {
   return (
     <>
-      <GlassPanels />
+      {/* <GlassPanels />
       
-      <Header />
+      <Header /> */}
       
-      <Container className="pb-20 pt-2">
-        <div className="my-4 mb-6">
+      {/* <Container 
+       className='!mx-0 !px-0'> */}
+        {/* <div className="my-4 mb-6">
           <h1 className="text-3xl font-display font-bold">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-400">
               Fashion Reels
@@ -28,10 +29,10 @@ export default function ReelsPage() {
           </p>
         </div>
         
-        <ReelsCategories />
+        <ReelsCategories /> */}
         
         <ReelsViewer />
-      </Container>
+      {/* </Container> */}
     </>
   );
 }

@@ -129,12 +129,12 @@ const ReelsViewer = () => {
   const currentReel = reels[currentReelIndex];
   
   return (
-    <div className="flex flex-col items-center">
-      {/* Main reels viewer */}
-      <div 
-        ref={reelsContainerRef}
-        className="w-full max-w-md relative h-[80vh] rounded-2xl overflow-hidden"
-      >
+    <div className="fixed top-0 left-0 right-0 bottom-16 z-30 overflow-hidden">
+      <div
+          ref={reelsContainerRef}
+          className="relative max-w-md mx-auto w-full h-full overflow-hidden"
+        >
+        {/* Reel Viewer */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentReel.id}
@@ -149,12 +149,57 @@ const ReelsViewer = () => {
               onSwipe={handleSwipe}
               showInstructions={!hasShownInstructions}
               onInstructionsShown={() => setHasShownInstructions(true)}
-              isTransitioning={isTransitioning} // Pass transitioning state to ReelCard
+              isTransitioning={isTransitioning}
+              className='!rounded-none'
             />
           </motion.div>
         </AnimatePresence>
-        
-        {/* Like effect overlay */}
+
+        {/* Floating Previous Button */}
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20">
+          <Button 
+            variant="glass" 
+            size="icon"
+            onClick={goToPreviousReel}
+            disabled={reelHistory.length === 0 || isTransitioning}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7" />
+            </svg>
+          </Button>
+        </div>
+
+        {/* Floating Skip Button */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
+          <Button 
+            variant="glass" 
+            size="icon"
+            onClick={() => handleSwipe('left')}
+            disabled={isTransitioning}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7" />
+            </svg>
+          </Button>
+        </div>
+
+        {/* Floating Wishlist Button */}
+        {wishlist.length > 0 && (
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-gray-200/10 backdrop-blur-sm border border-white/20 rounded-full px-2 py-1">
+            <Button 
+              variant="primary" 
+              size="sm"
+              onClick={toggleWishlist}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              Wishlist ({wishlist.length})
+            </Button>
+          </div>
+        )}
+
+        {/* Like & Reject Effects */}
         {showLikeEffect && (
           <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
             <div className="animate-float-up">
@@ -164,8 +209,7 @@ const ReelsViewer = () => {
             </div>
           </div>
         )}
-        
-        {/* Reject effect overlay */}
+
         {showRejectEffect && (
           <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
             <div className="animate-float-up">
@@ -175,67 +219,14 @@ const ReelsViewer = () => {
             </div>
           </div>
         )}
+        <WishlistDrawer 
+          isOpen={isWishlistOpen} 
+          onClose={() => setIsWishlistOpen(false)} 
+          className='max-w-md w-full'
+        />
       </div>
-      
-      {/* Action buttons */}
-      <div className="mt-6 w-full max-w-md flex justify-between">
-        <Button 
-          variant="glass" 
-          size="lg"
-          className="flex items-center"
-          onClick={goToPreviousReel}
-          disabled={reelHistory.length === 0 || isTransitioning}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
-          </svg>
-          Previous
-        </Button>
-        
-        <Button 
-          variant="glass" 
-          size="lg"
-          className="flex items-center"
-          onClick={() => handleSwipe('left')}
-          disabled={isTransitioning}
-        >
-          Skip
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-          </svg>
-        </Button>
-      </div>
-      
-      {/* Wishlist counter and button */}
-      {wishlist.length > 0 && (
-        <div className="mt-4 w-full max-w-md flex justify-center">
-          <Button 
-            variant="primary" 
-            size="md"
-            className="flex items-center px-6"
-            onClick={toggleWishlist}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-            <span className="font-medium">View Wishlist</span>
-            <Badge 
-              variant="accent" 
-              size="sm" 
-              className="ml-2"
-            >
-              {wishlist.length}
-            </Badge>
-          </Button>
-        </div>
-      )}
-      
-      {/* Wishlist Drawer */}
-      <WishlistDrawer 
-        isOpen={isWishlistOpen} 
-        onClose={() => setIsWishlistOpen(false)} 
-      />
     </div>
+    
   );
 };
 
