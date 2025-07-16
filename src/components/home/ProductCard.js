@@ -3,11 +3,14 @@
 import { useState } from 'react';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
+import { useCart } from '@/context/CartContext';
+
 
 const ProductCard = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  
+  const { addToCart } = useCart();
+
   const handleSwipe = (direction) => {
     if (direction === 'next') {
       setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
@@ -73,7 +76,7 @@ const ProductCard = ({ product }) => {
           </div>
           
           <div className="absolute bottom-2 right-2 add-to-bag">
-            <button className="add-to-bag-btn">
+            <button className="add-to-bag-btn" onClick={() => addToCart(product)}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>

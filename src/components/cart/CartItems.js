@@ -4,63 +4,16 @@ import { useState } from 'react';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import CartItemCard from './CartItemCard';
+import { useCart } from '@/context/CartContext';
 
 const CartItems = () => {
   // Mock cart data
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: 'Oversized Cotton T-shirt',
-      price: 1299,
-      originalPrice: 1999,
-      quantity: 1,
-      store: 'Zara',
-      deliveryTime: '25 min',
-      color: 'White',
-      size: 'M',
-      image: '/api/placeholder/400/320',
-    },
-    {
-      id: 2,
-      name: 'High Rise Skinny Jeans',
-      price: 2499,
-      quantity: 1,
-      store: 'H&M',
-      deliveryTime: '30 min',
-      color: 'Blue',
-      size: '30',
-      image: '/api/placeholder/400/320',
-    },
-    {
-      id: 3,
-      name: 'Air Max Sneakers',
-      price: 7999,
-      quantity: 1,
-      store: 'Nike',
-      deliveryTime: '35 min',
-      color: 'Black/White',
-      size: 'UK 9',
-      image: '/api/placeholder/400/320',
-    }
-  ]);
+   const { cartItems, updateQuantity, removeFromCart } = useCart();
   
   // Calculate totals
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-  
-  // Handle quantity change
-  const updateQuantity = (itemId, newQuantity) => {
-    if (newQuantity < 1) return;
-    
-    setCartItems(cartItems.map(item => 
-      item.id === itemId ? { ...item, quantity: newQuantity } : item
-    ));
-  };
-  
-  // Handle remove item
-  const removeItem = (itemId) => {
-    setCartItems(cartItems.filter(item => item.id !== itemId));
-  };
+
   
   return (
     <Card variant="glass" className="overflow-hidden">
@@ -80,7 +33,7 @@ const CartItems = () => {
                 key={item.id}
                 item={item}
                 updateQuantity={updateQuantity}
-                removeItem={removeItem}
+                removeItem={removeFromCart}  
               />
             ))
           ) : (

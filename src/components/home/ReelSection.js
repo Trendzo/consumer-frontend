@@ -1,10 +1,14 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Card from '@/components/ui/Card';
+import Link from 'next/link';
+import Modal from '@/components/ui/Modal';
 
 const ReelSection = () => {
   const scrollRef = useRef(null);
+  const [activeReel, setActiveReel] = useState(null);
+
   
   // Mock data with videos instead of images
   const reels = [
@@ -55,13 +59,10 @@ const ReelSection = () => {
   
   return (
     <div className="relative">
-      <div 
-        className="flex items-stretch gap-4 overflow-x-auto py-2 scrollbar-none"
-        ref={scrollRef}
-      >
+      <div className="flex items-stretch gap-4 overflow-x-auto py-2 scrollbar-none" ref={scrollRef}>
         {reels.map((reel) => (
-          <div key={reel.id} className="w-40 flex-shrink-0">
-            <Card variant="glass" hover className="h-64">
+          <div key={reel.id} className="w-40 flex-shrink-0" onClick={() => setActiveReel(reel)}>
+            <Card variant="glass" hover className="h-64 cursor-pointer">
               <div className="relative h-full w-full overflow-hidden">
                 {/* Video element instead of background image */}
                 <video
@@ -138,6 +139,36 @@ const ReelSection = () => {
           <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
         </svg>
       </button>
+        {activeReel && (
+            <Modal onClose={() => setActiveReel(null)}>
+              <div className="relative w-full h-full">
+                {/* Video covers full */}
+                <video
+                  src={activeReel.videoUrl}
+                  controls
+                  autoPlay
+                  loop
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Show More Button on top-right */}
+                <Link
+                  href="/reels"
+                  className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-cyan-400 text-white text-xs px-3 py-1 rounded-full shadow hover:scale-105 transition-transform z-10"
+                >
+                  Show More
+                </Link>
+
+                {/* Bottom Gradient Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent text-white p-4 z-10">
+                  <h2 className="text-lg font-bold">{activeReel.title}</h2>
+                  <p className="text-xs text-gray-300">By {activeReel.user.name}</p>
+                  <span className="text-xs text-gray-400">{activeReel.likes} Likes</span>
+                </div>
+              </div>
+            </Modal>
+          )}
+
     </div>
   );
 };
