@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
+import { useCart } from '@/context/CartContext';
 
 const WishlistSection = () => {
   // Mock wishlist data
@@ -35,6 +36,8 @@ const WishlistSection = () => {
       image: '/api/placeholder/400/320',
     }
   ]);
+
+  const { addToCart } = useCart();
   
   // Handle remove from wishlist
   const removeFromWishlist = (itemId) => {
@@ -130,9 +133,10 @@ const WishlistSection = () => {
                             </svg>
                           </button>
                           
-                          <button 
+                          <button
                             className="w-7 h-7 bg-purple-500 rounded-full flex items-center justify-center"
                             title="Add to cart"
+                            onClick={() => addToCart(item)}
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

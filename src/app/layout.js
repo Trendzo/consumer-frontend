@@ -2,6 +2,7 @@ import './globals.css';
 import { Poppins, Manrope } from 'next/font/google';
 import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from '@/context/ThemeProvider';
+import { CartProvider } from '@/context/CartContext';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,13 +27,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${manrope.variable} font-sans`}>
+        
         <ThemeProvider>
+          <CartProvider>
           <div className="min-h-screen flex flex-col">
-            <main className="flex-grow pb-20">
+            <main className="flex-grow pb-16">
               {children}
             </main>
             <Footer />
           </div>
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

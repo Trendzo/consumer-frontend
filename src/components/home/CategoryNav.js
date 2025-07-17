@@ -1,6 +1,7 @@
 'use client';
 
 import Card from '@/components/ui/Card';
+import Link from 'next/link';
 
 const CategoryNav = () => {
   // Visual category tiles matching the image
@@ -69,6 +70,7 @@ const CategoryNav = () => {
       {/* Category visual grid - 2 items per row on mobile, 3 on larger screens */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {categoryTiles.map((tile) => (
+          <Link href={`/product?category=${tile.id}`} key={tile.id}>
           <Card 
             key={tile.id}
             variant="glass" 
@@ -116,6 +118,7 @@ const CategoryNav = () => {
               )}
             </div>
           </Card>
+          </Link>
         ))}
       </div>
     </div>
