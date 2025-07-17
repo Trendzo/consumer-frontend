@@ -43,53 +43,41 @@ const ReelCard = ({
   
   // Initialize video playback and progress tracking
   useEffect(() => {
-    const videoElement = videoRef.current;
-    
-    if (videoElement) {
-      videoElement.muted = isMuted;
-      
-      if (isPlaying && !isTransitioning) {
-        const playPromise = videoElement.play();
-        
-        // Handle play promise properly to avoid the error
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            // Auto-play was prevented, handle silently
-            console.log("Auto-play prevented:", error);
-          });
-        }
-        
-        // Set up progress tracking
-        progressIntervalRef.current = setInterval(() => {
-          if (videoElement.duration) {
-            setProgress((videoElement.currentTime / videoElement.duration) * 100);
-          }
-        }, 100);
-      } else {
-        // Pause video during transitions to prevent errors
-        try {
-          videoElement.pause();
-        } catch (e) {
-          // Ignore pause errors
-        }
-        clearInterval(progressIntervalRef.current);
-      }
-    }
-    
-    return () => {
-      clearInterval(progressIntervalRef.current);
-      // Ensure video is properly cleaned up on component unmount
-      if (videoRef.current) {
-        try {
-          videoRef.current.pause();
-          videoRef.current.src = ""; // Clear the source
-        } catch (e) {
-          // Ignore errors during cleanup
-        }
-      }
-    };
-  }, [isPlaying, isMuted, reel.id, isTransitioning]);
+  const videoElement = videoRef.current;
   
+  if (videoElement) {
+    videoElement.muted = isMuted;
+    
+    if (isPlaying && !isTransitioning) {
+      const playPromise = videoElement.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => console.log("Auto-play prevented:", error));
+      }
+      
+      progressIntervalRef.current = setInterval(() => {
+        if (videoElement.duration) {
+          setProgress((videoElement.currentTime / videoElement.duration) * 100);
+        }
+      }, 100);
+    } else {
+      try {
+        videoElement.pause();
+      } catch (e) {}
+      clearInterval(progressIntervalRef.current);
+    }
+  }
+  
+  return () => {
+    clearInterval(progressIntervalRef.current);
+    if (videoElement) {
+      try {
+        videoElement.pause();
+        videoElement.src = "";
+      } catch (e) {}
+    }
+  };
+}, [isPlaying, isMuted, reel.id, isTransitioning]);
+
   // Toggle video play/pause
   const togglePlay = (e) => {
     e.stopPropagation();
