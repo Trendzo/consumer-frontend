@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Card from '@/components/ui/Card';
+import Link from 'next/link';
 
 const StoreSlider = () => {
   const scrollRef = useRef(null);
@@ -32,6 +33,7 @@ const StoreSlider = () => {
         ref={scrollRef}
       >
         {stores.map((store) => (
+          <Link href={`/product?brand=${encodeURIComponent(store.name)}`} key={store.id}>
           <div key={store.id} className="px-2 w-40 flex-shrink-0">
             <Card variant="neomorph" hover className="p-4 h-36 flex flex-col items-center justify-center">
               <div className="w-16 h-16 rounded-full neomorph flex items-center justify-center mb-4">
@@ -47,6 +49,7 @@ const StoreSlider = () => {
               <p className="text-xs text-text-secondary">{store.deliveryTime}</p>
             </Card>
           </div>
+          </Link>
         ))}
       </div>
       

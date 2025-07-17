@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
+import Link from 'next/link';
 
 const TrendingItem = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,11 +23,12 @@ const TrendingItem = ({ item }) => {
   const discountPercent = calculateDiscount();
   
   return (
+    <Link href={`/product/${item.id}`}>
     <Card 
-      variant="glass" 
-      className="transition-all duration-300 hover:-translate-y-2 overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    variant="glass" 
+    className="transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-pointer"
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative">
         {/* Image with overlay for trending rank */}
@@ -131,6 +133,7 @@ const TrendingItem = ({ item }) => {
         </div>
       </div>
     </Card>
+    </Link>
   );
 };
 
