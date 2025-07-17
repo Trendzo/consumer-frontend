@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Card from '@/components/ui/Card';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const StoreSlider = () => {
   const scrollRef = useRef(null);
-  
+
   const stores = [
     { id: 1, name: 'Zara', deliveryTime: '25 min', logo: 'https://thumbs.dreamstime.com/b/zara-logo-editorial-illustrative-white-background-logo-icon-vector-logos-icons-set-social-media-flat-banner-vectors-svg-eps-jpg-210444071.jpg' },
     { id: 2, name: 'H&M', deliveryTime: '30 min', logo: 'https://seeklogo.com/images/H/h-m-logo-89DCA36A67-seeklogo.com.png' },
@@ -17,7 +18,7 @@ const StoreSlider = () => {
     { id: 7, name: 'Levi\'s', deliveryTime: '30 min', logo: 'https://static.vecteezy.com/system/resources/previews/023/871/675/non_2x/levis-logo-brand-symbol-design-clothes-fashion-illustration-free-vector.jpg' },
     { id: 8, name: 'FabIndia', deliveryTime: '50 min', logo: 'https://content.jdmagicbox.com/comp/haldwani/i6/9999p5946.5946.171122124842.u4i6/catalogue/fabindia-haldwani-ho-haldwani-fabindia-0kspefljn4.jpg' },
   ];
-  
+
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { current } = scrollRef;
@@ -25,7 +26,7 @@ const StoreSlider = () => {
       current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
-  
+
   return (
     <div className="relative">
       <div 
@@ -34,25 +35,21 @@ const StoreSlider = () => {
       >
         {stores.map((store) => (
           <Link href={`/product?brand=${encodeURIComponent(store.name)}`} key={store.id}>
-          <div key={store.id} className="px-2 w-40 flex-shrink-0">
-            <Card variant="neomorph" hover className="p-4 h-36 flex flex-col items-center justify-center">
-              <div className="w-16 h-16 rounded-full neomorph flex items-center justify-center mb-4">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden">
-                  <img 
-                    src={store.logo} 
-                    alt={`${store.name} logo`} 
-                    className="w-full h-full object-contain"
-                  />
+            <div className="px-2 w-40 flex-shrink-0">
+              <Card variant="neomorph" hover className="p-4 h-36 flex flex-col items-center justify-center">
+                <div className="w-16 h-16 rounded-full neomorph flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden">
+                    <StoreLogo src={store.logo} name={store.name} />
+                  </div>
                 </div>
-              </div>
-              <h3 className="font-medium text-center">{store.name}</h3>
-              <p className="text-xs text-text-secondary">{store.deliveryTime}</p>
-            </Card>
-          </div>
+                <h3 className="font-medium text-center">{store.name}</h3>
+                <p className="text-xs text-text-secondary">{store.deliveryTime}</p>
+              </Card>
+            </div>
           </Link>
         ))}
       </div>
-      
+
       <button 
         className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 neomorph rounded-full flex items-center justify-center z-10"
         onClick={() => scroll('left')}
@@ -61,7 +58,7 @@ const StoreSlider = () => {
           <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
         </svg>
       </button>
-      
+
       <button 
         className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 neomorph rounded-full flex items-center justify-center z-10"
         onClick={() => scroll('right')}
@@ -75,3 +72,20 @@ const StoreSlider = () => {
 };
 
 export default StoreSlider;
+
+// ✅ Helper component for logo with fallback
+const StoreLogo = ({ src, name }) => {
+  const [logoSrc, setLogoSrc] = useState(src);
+
+  return (
+    <Image
+      src={logoSrc}
+      alt={`${name} logo`}
+      width={48}
+      height={48}
+      unoptimized
+      className="w-full h-full object-contain"
+      onError={() => setLogoSrc('https://via.placeholder.com/48x48?text=N/A')}
+    />
+  );
+};

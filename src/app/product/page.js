@@ -3,10 +3,9 @@
 import GlassPanels from '@/components/layout/GlassPanels';
 import Header from '@/components/layout/Header';
 import Container from '@/components/layout/Container';
-
+import ProductListingCategoriesWrapper from '@/components/products/ProductListingCategoriesWrapper';
 import ProductListingHeader from '@/components/products/ProductListingHeader';
-import ProductListingCategories from '@/components/products/ProductListingCategories';
-import ProductListingGrid from '@/components/products/ProductListingGrid';
+import ProductListingGridWrapper from '@/components/products/ProductListingGridWrapper';
 
 export default function ProductsPage() {
   return (
@@ -15,8 +14,8 @@ export default function ProductsPage() {
       <Header />
       <Container className="pb-16">
         <ProductListingHeader />
-        <ProductListingCategories />
-        <ProductListingGrid />
+        <ProductListingCategoriesWrapper />
+        <ProductListingGridWrapper />
       </Container>
     </>
   );
